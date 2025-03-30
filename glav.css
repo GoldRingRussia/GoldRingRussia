@@ -1,0 +1,32 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #e39e37;
+    color: #fff;
+    padding: 30px;
+}
+
+nav{
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
+a{
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main{
+    background-color: blanchedalmond;
+    margin-top: 15px;
+    width: 100vw;
+    height: auto;
+}
