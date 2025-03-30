@@ -3,6 +3,13 @@
     margin: 0%;
 }
 
+body{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: end;
+}
+
 header{
     display: flex;
     justify-content: space-between;
@@ -29,4 +36,12 @@ main{
     margin-top: 15px;
     width: 100vw;
     height: auto;
+}
+
+footer{
+    display: flex;
+    margin: 30px;
+    align-items: end;
+    background-color: #e39e37;
+    padding: 30px;
 }
