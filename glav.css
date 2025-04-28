@@ -69,56 +69,6 @@ p{
     font-size: 36px;
 }
 
-.main_city{
-    margin-top: 100px;
-    color: #fff;
-    
-}
-
-.img_city{
-    width: 720px;
-    height:720px;
-    border-radius: 10px;
-}
-
-.city_text{
-    background-color: #2F2F2F;
-    width: 701px;
-    height: 701px;
-    font-weight: 300;
-    border-radius: 25px;
-    padding: 11px 24px;
-    display:flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-bottom: 150px;
-
-}
-
-.city_text_h{
-    margin-top: 30px;
-    font-size: 50px;
-    text-align: start;
-}
-
-.city_text_p{
-    font-size: 30px;
-}
-
-.city{
-    justify-content: center;
-    display: flex;
-    align-content: center;
-    gap: 200px;
-}
-
-.city_r{
-    justify-content: center;
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 200px;
-}
-
 .hidden-left {
     opacity: 0;
     transform: translateX(-100px);
@@ -139,3 +89,4 @@ p{
     transform: translateY(50px);
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
+

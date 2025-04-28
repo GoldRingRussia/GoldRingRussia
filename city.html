@@ -78,12 +78,23 @@ p{
 }
 
 .img_city{
-    width: 720px;
-    height:720px;
+    width: 700px;
+    height:700px;
     border-radius: 10px;
     object-fit: cover;
     transition: transform 1s ease, opacity 1s ease;
+    filter: drop-shadow(-20px -20px 25px rgba(0, 0, 0, 0.30));
 }
+
+.img_city_r{
+    width: 700px;
+    height:700px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 1s ease, opacity 1s ease;
+    filter: drop-shadow(20px 20px 25px rgba(0, 0, 0, 0.30));
+}
+
 
 .city_text{
     background-color: #2F2F2F;
@@ -141,7 +152,7 @@ p{
 <main class="main_city">
     <div class="content_city">
         <section class="city"> 
-            <img src="img/Sergiev.png" alt="Сергиев Посад" class="img_city hidden-left">
+            <img src="img/Sergiev.jpg" alt="Сергиев Посад" class="img_city hidden-left">
             <div class="city_text hidden-right">
                 <h2 class="city_text_h">Сергиев Посад</h2>
                 <p class="city_text_p">Сергиев Посад — единственный город Московской области в Золотом кольце.
@@ -154,7 +165,7 @@ p{
             </div>
         </section>
         <section class="city_r"> 
-            <img src="img/Pereslavl.jpg" alt="Сергиев Посад" class="img_city hidden-right">
+            <img src="img/Pereslavl.jpg" alt="Сергиев Посад" class="img_city_r hidden-right">
             <div class="city_text hidden-left">
                 <h2 class="city_text_h">Переславль-Залесский</h2>
                 <p class="city_text_p">
@@ -183,7 +194,7 @@ p{
             </div>
         </section>
         <section class="city_r"> 
-            <img src="img/Suzdal.png" alt="Сергиев Посад" class="img_city hidden-right">
+            <img src="img/Suzdal.png" alt="Сергиев Посад" class="img_city_r hidden-right">
             <div class="city_text hidden-left">
                 <h2 class="city_text_h">Суздаль</h2>
                 <p class="city_text_p">Суздаль является одним из величайших городов Золотого кольца, основанным, вероятно, в X веке. Первое упоминание о нем датируется 1024 годом. Город был столицей Ростово-Суздальского княжества и сегодня входит во Владимирскую область.<br><br>
@@ -192,7 +203,7 @@ p{
             </div>
         </section>
         <section class="city"> 
-            <img src="img/Kostroma.png" alt="Сергиев Посад" class="img_city hidden-left">
+            <img src="img/Kostroma.jpg" alt="Сергиев Посад" class="img_city hidden-left">
             <div class="city_text hidden-right">
                 <h2 class="city_text_h">Кострома</h2>
                 <p class="city_text_p">История города неразрывно связана с великим князем Юрием Долгоруким: он основал Кострому в 1152 году в качестве северо-восточного форпоста рубежей Древней Руси. Из значимых исторических событий — избрание на престол Михаила Романова в Костроме и поход Ивана Сусанина по костромским болотам.<br><br>
@@ -201,7 +212,7 @@ p{
             </div>
         </section>
         <section class="city_r"> 
-            <img src="img/Yroslavl.png" alt="Сергиев Посад" class="img_city hidden-right">
+            <img src="img/Yroslavl.png" alt="Сергиев Посад" class="img_city_r hidden-right">
             <div class="city_text hidden-left">
                 <h2 class="city_text_h">Ярославль</h2>
                 <p class="city_text_p">Это признанная столица Золотого кольца. Главный храм города — Успенский собор. В 1937-м году его взорвали, а на его месте разбили городской парк. Собор восстановили только в 2010-м году к тысячелетию Ярославля.<br><br>
