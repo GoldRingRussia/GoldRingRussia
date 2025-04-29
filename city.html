@@ -1,269 +1,492 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="glav.css">
-</head>
-<style>
-    *{
-    padding: 0%;
-    margin: 0%;
-    box-sizing: border-box;
-}
-
-body{
-    background-color: #3F3F3F;
-    overflow-x: hidden;
-}
-
-header{
-    padding: 10px 24px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: #ffd000;
-}
-
-h1{
-    font-size: 64px;
-}
-
-nav{
-    padding: 37px;
-    font-size: 32px;
-    display: flex;
-    align-items: end;
-    gap: 62px;
-}
-
-a{
-    color: #fff;
-    border: none;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.main_index{
-    display: flex;
-    margin-top: 100px;
-    color: #fff;
-}
-
-img{
-    width: 729px;
-    height:412px;
-}
-
-h2{
-    text-align: center;
-    font-size: 64px;
-}
-
-.info{
-    font-size: 32px;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    gap:20px
-}
-
-p{
-    font-size: 36px;
-}
-
-.main_city{
-    margin-top: 100px;
-    color: #fff;
-}
-
-.img_city{
-    width: 700px;
-    height:700px;
-    border-radius: 10px;
-    object-fit: cover;
-    transition: transform 1s ease, opacity 1s ease;
-    filter: drop-shadow(-20px -20px 25px rgba(0, 0, 0, 0.30));
-}
-
-.img_city_r{
-    width: 700px;
-    height:700px;
-    border-radius: 10px;
-    object-fit: cover;
-    transition: transform 1s ease, opacity 1s ease;
-    filter: drop-shadow(20px 20px 25px rgba(0, 0, 0, 0.30));
-}
-
-
-.city_text{
-    background-color: #2F2F2F;
-    width: 701px;
-    height: 701px;
-    font-weight: 300;
-    border-radius: 25px;
-    padding: 11px 24px;
-    display:flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-bottom: 150px;
-    transition: transform 1s ease, opacity 1s ease;
-}
-
-.city_text_h{
-    margin-top: 30px;
-    font-size: 50px;
-    text-align: start;
-}
-
-.city_text_p{
-    font-size: 28px;
-}
-
-.city{
-    justify-content: center;
-    display: flex;
-    align-content: center;
-    gap: 200px;
-    margin-bottom: 100px;
-}
-
-.city_r{
-    justify-content: center;
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 200px;
-    margin-bottom: 100px;
-}
-
-
-</style>
-<body>
-<header>
-    <h1>Золотоая сказка</h1>
-    <nav>
-        <a href="index.html">На Главную</a>
-        <a href="history.html">История</a>
-        <a href="дискретка/marsh.html">Маршруты</a>
-        <a href="city.html">Города</a> 
-    </nav>
-</header>
-
-<main class="main_city">
-    <div class="content_city">
-        <section class="city"> 
-            <img src="img/Sergiev.jpg" alt="Сергиев Посад" class="img_city hidden-left">
-            <div class="city_text hidden-right">
-                <h2 class="city_text_h">Сергиев Посад</h2>
-                <p class="city_text_p">Сергиев Посад — единственный город Московской области в Золотом кольце.
-                    Его история начинается с 1340 года, когда была возведена церковь в честь Троицы. Вокруг нее
-                    образовался монастырь, основанный последователями Сергия Радонежского.<br><br>
-                    В 1380 году сюда прибыл Дмитрий Донской за благословением перед Куликовской битвой. В 1422 
-                    году был заложен Троицкий собор, где крестили Ивана Грозного. Он укрепил монастырь, заменив деревянную ограду каменной.<br><br>
-                    В 1744 году монастырь получил статус лавры. Город переименовывали несколько раз: в 1919 году — "Сергиев", в 1930 — "Загорск", 
-                    а в 1991 вернули историческое название.</p>
-            </div>
-        </section>
-        <section class="city_r"> 
-            <img src="img/Pereslavl.jpg" alt="Сергиев Посад" class="img_city_r hidden-right">
-            <div class="city_text hidden-left">
-                <h2 class="city_text_h">Переславль-Залесский</h2>
-                <p class="city_text_p">
-                    Переславль-Залесский был основан в 1152 году князем Юрием Долгоруким и первоначально назывался Переяславлем. Город возник на территории Залесья, поэтому его переименовали в Переяславль-Залесский.<br><br>
-
-В 1220 году здесь родился князь Александр Невский. Город стал столицей Северо-Восточной Руси и резиденцией его сына Дмитрия Переяславского.<br><br> 
-
-В 1688 году, недалеко от города, Петр I начал строительство флотилии на Плещеевом озере, что дало старт русскому флоту. В местном музее выставлен ботик "Фортуна", как считается, построенный царем. 
-                </p>
-            </div>
-        </section>
-        <section class="city"> 
-            <img src="img/Vladimir.jpg" alt="Сергиев Посад" class="img_city hidden-left">
-            <div class="city_text hidden-right">
-                <h2 class="city_text_h">Владимир</h2>
-                <p class="city_text_p">Владимир — важный туристический центр, который привлекает путешественников архитектурными памятниками из 
-                    списка объектов Всемирного наследия ЮНЕСКО.<br><br>
-                    
-                    Среди них Золотые ворота, домонгольские белокаменные храмы и знаменитые фрески Андрея Рублёва.
-                    Одна из главных достопримечательностей города — Дмитриевский собор. 
-                    Он был выстроен в конце XII века как домовая церковь при дворце князя 
-                    Всеволода Большое Гнездо.<br><br> 
-                    
-                    Но главная достопримечательность города — Свято-Успенский Кафедральный собор. 
-                    </p>
-            </div>
-        </section>
-        <section class="city_r"> 
-            <img src="img/Suzdal.png" alt="Сергиев Посад" class="img_city_r hidden-right">
-            <div class="city_text hidden-left">
-                <h2 class="city_text_h">Суздаль</h2>
-                <p class="city_text_p">Суздаль является одним из величайших городов Золотого кольца, основанным, вероятно, в X веке. Первое упоминание о нем датируется 1024 годом. Город был столицей Ростово-Суздальского княжества и сегодня входит во Владимирскую область.<br><br>
-
-                    Суздаль расположен на реке Каменке, где образованы живописные полуострова. Несмотря на небольшие размеры, в городе находятся пять монастырей и более 200 памятников архитектуры. </p>
-            </div>
-        </section>
-        <section class="city"> 
-            <img src="img/Kostroma.jpg" alt="Сергиев Посад" class="img_city hidden-left">
-            <div class="city_text hidden-right">
-                <h2 class="city_text_h">Кострома</h2>
-                <p class="city_text_p">История города неразрывно связана с великим князем Юрием Долгоруким: он основал Кострому в 1152 году в качестве северо-восточного форпоста рубежей Древней Руси. Из значимых исторических событий — избрание на престол Михаила Романова в Костроме и поход Ивана Сусанина по костромским болотам.<br><br>
-
-                    Город стоит на реке Волге и реке Кострома, и достопримечательности расположились вдоль их берегов. Главная — Свято-Троицкий Ипатьевский монастырь. Именно в этом месте Костромы Михаил Романов был призван на царствование, что положило конец Смутному времени.</p>
-            </div>
-        </section>
-        <section class="city_r"> 
-            <img src="img/Yroslavl.png" alt="Сергиев Посад" class="img_city_r hidden-right">
-            <div class="city_text hidden-left">
-                <h2 class="city_text_h">Ярославль</h2>
-                <p class="city_text_p">Это признанная столица Золотого кольца. Главный храм города — Успенский собор. В 1937-м году его взорвали, а на его месте разбили городской парк. Собор восстановили только в 2010-м году к тысячелетию Ярославля.<br><br>
-
-                    На слиянии Волги и Которосли, в IX веке появилось поселение финно-угров, которое положило начало Ярославлю.<br><br>
-                    
-                    Вдоль главной набережной расположены дома купцов, фонтаны и храмы — Ильи Пророка, Ильинско-Тихоновский, Успенский. Местные жители катаются по набережной на велосипедах или роликах.</p>
-            </div>
-        </section>
-    </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let lastScrollY = window.scrollY;
-        let ticking = false;
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Города Золотого Кольца</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const direction = window.scrollY > lastScrollY ? 'down' : 'up';
-                lastScrollY = window.scrollY;
-                
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                    entry.target.classList.remove('hide-up');
-                } else {
-                    if (direction === 'up') {
-                        entry.target.classList.remove('show');
-                        entry.target.classList.add('hide-up');
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: #252525;
+            padding: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header h1 {
+            text-align: center;
+            color: #d4af37;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #d4af37;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 70%;
+        }
+        
+        /* Основное содержимое */
+        .main_city {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .content_city {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        section.city, section.city_r {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            background-color: #252525;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        section.city:hover, section.city_r:hover {
+            transform: translateY(-5px);
+        }
+        
+        .img_city, .img_city_r {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+        
+        .img_city:hover, .img_city_r:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .city_text {
+            flex: 1;
+        }
+        
+        .city_text_h {
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .city_text_p {
+            color: #cccccc;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        /* Анимации появления */
+        .hidden-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .hidden-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .hide-up {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        
+        /* Расположение элементов */
+        section.city {
+            flex-direction: row;
+        }
+        
+        section.city_r {
+            flex-direction: row-reverse;
+        }
+        
+        /* Подвал сайта */
+        .dark-footer {
+            background-color: #252525;
+            color: #e0e0e0;
+            padding: 50px 0 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 40px;
+        }
+        
+        .footer-brand, 
+        .footer-nav, 
+        .footer-contacts, 
+        .footer-team {
+            flex: 1;
+            min-width: 220px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .footer-description {
+            color: #aaaaaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #d4af37;
+        }
+        
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-menu li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-menu li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        
+        .footer-menu li a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-menu li a i {
+            font-size: 10px;
+            color: #d4af37;
+        }
+        
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #b0b0b0;
+            font-size: 15px;
+        }
+        
+        .team-member i {
+            color: #d4af37;
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 18px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 30px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            section.city, section.city_r {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .img_city, .img_city_r {
+                width: 100%;
+                height: auto;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-brand, 
+            .footer-nav, 
+            .footer-contacts, 
+            .footer-team {
+                min-width: 100%;
+            }
+            
+            .footer-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Золотая сказка</h1>
+        <nav>
+            <a href="index.html">На Главную</a>
+            <a href="history.html">История</a>
+            <a href="дискретка/marsh.html">Маршруты</a>
+            <a href="city.html">Города</a> 
+            <a href="about.html">О нас</a>
+        </nav>
+    </header>
+
+    <main class="main_city">
+        <div class="content_city">
+            <section class="city"> 
+                <img src="img/Sergiev.jpg" alt="Сергиев Посад" class="img_city hidden-left">
+                <div class="city_text hidden-right">
+                    <h2 class="city_text_h">Сергиев Посад</h2>
+                    <p class="city_text_p">Сергиев Посад — единственный город Московской области в Золотом кольце.
+                        Его история начинается с 1340 года, когда была возведена церковь в честь Троицы. Вокруг нее
+                        образовался монастырь, основанный последователями Сергия Радонежского.<br><br>
+                        В 1380 году сюда прибыл Дмитрий Донской за благословением перед Куликовской битвой. В 1422 
+                        году был заложен Троицкий собор, где крестили Ивана Грозного. Он укрепил монастырь, заменив деревянную ограду каменной.<br><br>
+                        В 1744 году монастырь получил статус лавры. Город переименовывали несколько раз: в 1919 году — "Сергиев", в 1930 — "Загорск", 
+                        а в 1991 вернули историческое название.</p>
+                </div>
+            </section>
+            <section class="city_r"> 
+                <img src="img/Pereslavl.jpg" alt="Переславль-Залесский" class="img_city_r hidden-right">
+                <div class="city_text hidden-left">
+                    <h2 class="city_text_h">Переславль-Залесский</h2>
+                    <p class="city_text_p">
+                        Переславль-Залесский был основан в 1152 году князем Юрием Долгоруким и первоначально назывался Переяславлем. Город возник на территории Залесья, поэтому его переименовали в Переяславль-Залесский.<br><br>
+
+                        В 1220 году здесь родился князь Александр Невский. Город стал столицей Северо-Восточной Руси и резиденцией его сына Дмитрия Переяславского.<br><br> 
+
+                        В 1688 году, недалеко от города, Петр I начал строительство флотилии на Плещеевом озере, что дало старт русскому флоту. В местном музее выставлен ботик "Фортуна", как считается, построенный царем. 
+                    </p>
+                </div>
+            </section>
+            <section class="city"> 
+                <img src="img/Vladimir.jpg" alt="Владимир" class="img_city hidden-left">
+                <div class="city_text hidden-right">
+                    <h2 class="city_text_h">Владимир</h2>
+                    <p class="city_text_p">Владимир — важный туристический центр, который привлекает путешественников архитектурными памятниками из 
+                        списка объектов Всемирного наследия ЮНЕСКО.<br><br>
+                        
+                        Среди них Золотые ворота, домонгольские белокаменные храмы и знаменитые фрески Андрея Рублёва.
+                        Одна из главных достопримечательностей города — Дмитриевский собор. 
+                        Он был выстроен в конце XII века как домовая церковь при дворце князя 
+                        Всеволода Большое Гнездо.<br><br> 
+                        
+                        Но главная достопримечательность города — Свято-Успенский Кафедральный собор. 
+                    </p>
+                </div>
+            </section>
+            <section class="city_r"> 
+                <img src="img/Suzdal.png" alt="Суздаль" class="img_city_r hidden-right">
+                <div class="city_text hidden-left">
+                    <h2 class="city_text_h">Суздаль</h2>
+                    <p class="city_text_p">Суздаль является одним из величайших городов Золотого кольца, основанным, вероятно, в X веке. Первое упоминание о нем датируется 1024 годом. Город был столицей Ростово-Суздальского княжества и сегодня входит во Владимирскую область.<br><br>
+
+                        Суздаль расположен на реке Каменке, где образованы живописные полуострова. Несмотря на небольшие размеры, в городе находятся пять монастырей и более 200 памятников архитектуры. </p>
+                </div>
+            </section>
+            <section class="city"> 
+                <img src="img/Kostroma.jpg" alt="Кострома" class="img_city hidden-left">
+                <div class="city_text hidden-right">
+                    <h2 class="city_text_h">Кострома</h2>
+                    <p class="city_text_p">История города неразрывно связана с великим князем Юрием Долгоруким: он основал Кострому в 1152 году в качестве северо-восточного форпоста рубежей Древней Руси. Из значимых исторических событий — избрание на престол Михаила Романова в Костроме и поход Ивана Сусанина по костромским болотам.<br><br>
+
+                        Город стоит на реке Волге и реке Кострома, и достопримечательности расположились вдоль их берегов. Главная — Свято-Троицкий Ипатьевский монастырь. Именно в этом месте Костромы Михаил Романов был призван на царствование, что положило конец Смутному времени.</p>
+                </div>
+            </section>
+            <section class="city_r"> 
+                <img src="img/Yroslavl.png" alt="Ярославль" class="img_city_r hidden-right">
+                <div class="city_text hidden-left">
+                    <h2 class="city_text_h">Ярославль</h2>
+                    <p class="city_text_p">Это признанная столица Золотого кольца. Главный храм города — Успенский собор. В 1937-м году его взорвали, а на его месте разбили городской парк. Собор восстановили только в 2010-м году к тысячелетию Ярославля.<br><br>
+
+                        На слиянии Волги и Которосли, в IX веке появилось поселение финно-угров, которое положило начало Ярославлю.<br><br>
+                        
+                        Вдоль главной набережной расположены дома купцов, фонтаны и храмы — Ильи Пророка, Ильинско-Тихоновский, Успенский. Местные жители катаются по набережной на велосипедах или роликах.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="dark-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>© GoldRingRussia</h3>
+                <p class="footer-description">Откройте для себя красоту Золотого Кольца России</p>
+            </div>
+            
+            <div class="footer-nav">
+                <h4 class="footer-title">Навигация</h4>
+                <ul class="footer-menu">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> На Главную</a></li>
+                    <li><a href="history.html"><i class="fas fa-chevron-right"></i> История</a></li>
+                    <li><a href="marsh.html"><i class="fas fa-chevron-right"></i> Маршруты</a></li>
+                    <li><a href="city.html"><i class="fas fa-chevron-right"></i> Города</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> О нас</a></li>
+                </ul>
+            </div>
+            <div class="footer-team">
+                <h4 class="footer-title">Команда</h4>
+                <div class="team-member">
+                    <i class="fas fa-code"></i>
+                    <span>Колыванов Иван</span>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-code"></i>
+                    <span>Динер София</span>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Давыдова Оксана</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const direction = window.scrollY > lastScrollY ? 'down' : 'up';
+                    lastScrollY = window.scrollY;
+                    
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        entry.target.classList.remove('hide-up');
+                    } else {
+                        if (direction === 'up') {
+                            entry.target.classList.remove('show');
+                            entry.target.classList.add('hide-up');
+                        }
                     }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            // Наблюдаем за всеми элементами с классами hidden-left и hidden-right
+            document.querySelectorAll('.hidden-left, .hidden-right').forEach(el => {
+                observer.observe(el);
+            });
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        lastScrollY = window.scrollY;
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
             });
-        }, {
-            threshold: 0.1
         });
-
-        // Наблюдаем за всеми элементами с классами hidden-left и hidden-right
-        document.querySelectorAll('.hidden-left, .hidden-right').forEach(el => {
-            observer.observe(el);
-        });
-
-        window.addEventListener('scroll', function() {
-            if (!ticking) {
-                window.requestAnimationFrame(function() {
-                    lastScrollY = window.scrollY;
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    });
-</script>
-
+    </script>
 </body>
 </html>
