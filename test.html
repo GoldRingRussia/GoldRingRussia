@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маршруты по Золотому кольцу | Золотая сказка</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ae7aeeeb-2a37-489d-89d8-2b172c8fc512&lang=ru_RU"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: #252525;
+            padding: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header h1 {
+            text-align: center;
+            color: #d4af37;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #d4af37;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 70%;
+        }
+        
+        /* Основное содержимое */
+        .route-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+        
+        .route-section h2 {
+            color: #d4af37;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .route-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #d4af37;
+        }
+        
+        .route-description {
+            background-color: #252525;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .route-description p {
+            color: #cccccc;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .map-container {
+            position: relative;
+            height: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            margin-bottom: 40px;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .city-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(37, 37, 37, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            max-width: 300px;
+            border: 1px solid #d4af37;
+            display: none;
+        }
+        
+        .city-info h3 {
+            color: #d4af37;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .city-info p {
+            color: #cccccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .city-info small {
+            color: #888;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 10px;
+            text-align: right;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 101;
+            background: rgba(37, 37, 37, 0.9);
+            color: #d4af37;
+            padding: 20px 30px;
+            border-radius: 5px;
+            border: 1px solid #d4af37;
+            font-size: 1.1rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .control-btn {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: rgba(212, 175, 55, 0.4);
+        }
+        
+        .cities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .city-card {
+            background-color: #252525;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .city-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+        
+        .city-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .city-content {
+            padding: 20px;
+        }
+        
+        .city-content h3 {
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        
+        .city-content p {
+            color: #cccccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Подвал сайта */
+        .dark-footer {
+            background-color: #252525;
+            color: #e0e0e0;
+            padding: 50px 0 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 40px;
+        }
+        
+        .footer-brand, 
+        .footer-nav, 
+        .footer-contacts, 
+        .footer-team {
+            flex: 1;
+            min-width: 220px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .footer-description {
+            color: #aaaaaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: #b0b0b0;
+            font-size: 18px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #d4af37;
+        }
+        
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-menu li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-menu li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        
+        .footer-menu li a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-menu li a i {
+            font-size: 10px;
+            color: #d4af37;
+        }
+        
+        .footer-contacts p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #b0b0b0;
+            font-size: 15px;
+        }
+        
+        .contact-icon {
+            color: #d4af37;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #b0b0b0;
+            font-size: 15px;
+        }
+        
+        .team-member i {
+            color: #d4af37;
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 18px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 30px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav {
+                gap: 15px;
+            }
+            
+            .map-container {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .route-section h2 {
+                font-size: 2rem;
+            }
+            
+            .city-info {
+                max-width: 250px;
+                right: 10px;
+                top: 10px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-brand, 
+            .footer-nav, 
+            .footer-contacts, 
+            .footer-team {
+                min-width: 100%;
+            }
+            
+            .footer-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Золотая сказка</h1>
+        <nav>
+            <a href="index.html">На Главную</a>
+            <a href="history.html">История</a>
+            <a href="marsh.html">Маршрут</a>
+            <a href="city.html">Города</a>
+            <a href="about.html">О нас</a>
+            <a href="team.html">Команда</a>
+        </nav>
+    </header>
+
+    <main class="route-section">
+        <h2>Классический маршрут по Золотому кольцу</h2>
+        
+        <div class="route-description">
+            <p>Золотое кольцо России - это знаменитый туристический маршрут, проходящий по древним городам Северо-Восточной Руси, в которых сохранились уникальные памятники истории и культуры России.</p>
+            <p>Наш маршрут включает 8 основных городов, каждый из которых представляет собой настоящую жемчужину русской истории и архитектуры. Ниже вы можете увидеть интерактивную карту маршрута с автоматической анимацией.</p>
+            <p>Рекомендуемая продолжительность путешествия: 7-10 дней. Лучшее время для поездки: с мая по сентябрь.</p>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="startTour">Запустить тур</button>
+            <button class="control-btn" id="pauseTour">Пауза</button>
+            <button class="control-btn" id="resetTour">Сбросить</button>
+        </div>
+        
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="city-info" id="cityInfo"></div>
+            <div class="loading" id="loading">Загрузка карты...</div>
+        </div>
+        
+        <h2>Города маршрута</h2>
+        
+        <div class="cities-list">
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?SergievPosad')"></div>
+                <div class="city-content">
+                    <h3>Сергиев Посад</h3>
+                    <p>Духовный центр России, знаменитый Троице-Сергиевой лаврой, основанной в 1337 году. Главная достопримечательность - белокаменный Троицкий собор.</p>
+                </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?Pereslavl')"></div>
+                <div class="city-content">
+                    <h3>Переславль-Залесский</h3>
+                    <p>Основан в 1152 году Юрием Долгоруким. Здесь находится Плещеево озеро, где молодой Петр I строил свою "потешную флотилию".</p>
+                </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?Rostov')"></div>
+                <div class="city-content">
+                    <h3>Ростов Великий</h3>
+                    <p>Известен с 862 года. Ростовский кремль - жемчужина русской архитектуры XVII века. Город славится своими колокольными звонами.</p>
+                </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?Yaroslavl')"></div>
+                <div class="city-content">
+                    <h3>Ярославль</h3>
+                    <p>Основан в 1010 году. Исторический центр включен в список Всемирного наследия ЮНЕСКО. Здесь находится древнейший русский тетр - Волковский.</p>
+                </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?Kostroma')"></div>
+                <div class="city-content">
+                    <h3>Кострома</h3>
+                    <p>Основана в 1152 году. Знаменита Ипатьевским монастырем и памятником Ивану Сусанину. Центр города имеет веерную планировку.</p>
+                </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?Ivanovo')"></div>
+                <div class="city-content">
+                    <h3>Иваново</h3>
+                    <p>Город невест с богатой текстильной историей. Известен конструктивистской архитектурой 1920-30-х годов и музеем ситца.</p>
+                </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?Suzdal')"></div>
+                <div class="city-content">
+                    <h3>Суздаль</h3>
+                    <p>Впервые упоминается в 1024 году. Сохранил атмосферу древнерусского города с 40 церквями. Центр города - музей под открытым небом.</p>
+                </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-image" style="background-image: url('https://source.unsplash.com/random/600x400?Vladimir')"></div>
+                <div class="city-content">
+                    <h3>Владимир</h3>
+                    <p>Основан в 1108 году. Золотые ворота и Успенский собор - шедевры древнерусского зодчества. Бывшая столица Северо-Восточной Руси.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="dark-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>© GoldRingRussia</h3>
+                <p class="footer-description">Откройте для себя красоту Золотого Кольца России</p>
+            </div>
+            
+            <div class="footer-nav">
+                <h4 class="footer-title">Навигация</h4>
+                <ul class="footer-menu">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> На Главную</a></li>
+                    <li><a href="history.html"><i class="fas fa-chevron-right"></i> История</a></li>
+                    <li><a href="marsh.html"><i class="fas fa-chevron-right"></i> Маршруты</a></li>
+                    <li><a href="city.html"><i class="fas fa-chevron-right"></i> Города</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> О нас</a></li>
+                </ul>
+            </div>
+            <div class="footer-team">
+                <h4 class="footer-title">Команда</h4>
+                <div class="team-member">
+                    <i class="fas fa-code"></i>
+                    <span>Колыванов Иван</span>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-code"></i>
+                    <span>Динер София</span>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Давыдова Оксана</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function checkYMaps() {
+            if (!window.ymaps) {
+                document.getElementById('map').innerHTML = 
+                    '<div style="color:red;padding:20px;text-align:center;">' +
+                    'Ошибка загрузки Яндекс.Карт. Проверьте:<br>' +
+                    '1. Интернет-соединение<br>' +
+                    '2. Правильность API-ключа<br>' +
+                    '3. Что ключ активирован в кабинете разработчика' +
+                    '</div>';
+                return false;
+            }
+            return true;
+        }
+
+        if (!checkYMaps()) {
+            throw new Error("Yandex Maps API не загружен");
+        }
+
+        ymaps.ready(init);
+        
+        const cities = [
+            { 
+                name: "Сергиев Посад", 
+                coords: [56.3100, 38.1300], 
+                info: "Сергиев Посад - духовный центр России, знаменитый Троице-Сергиевой лаврой, основанной в 1337 году. Главная достопримечательность - белокаменный Троицкий собор, где хранятся мощи Сергия Радонежского.",
+                image: "https://source.unsplash.com/random/600x400?SergievPosad"
+            },
+            { 
+                name: "Переславль-Залесский", 
+                coords: [56.7360, 38.8533], 
+                info: "Основан в 1152 году Юрием Долгоруким. Здесь находится Плещеево озеро и музей «Ботик Петра I» - единственный уцелевший корабль потешной флотилии молодого царя.",
+                image: "https://source.unsplash.com/random/600x400?Pereslavl"
+            },
+            { 
+                name: "Ростов Великий", 
+                coords: [57.1847, 39.4145], 
+                info: "Известен с 862 года. Ростовский кремль - жемчужина русской архитектуры XVII века. Город славится своими финифтяными (эмалевыми) изделиями и колокольными звонами.",
+                image: "https://source.unsplash.com/random/600x400?Rostov"
+            },
+            { 
+                name: "Ярославль", 
+                coords: [57.6261, 39.8845], 
+                info: "Основан в 1010 году. Исторический центр включен в список Всемирного наследия ЮНЕСКО. Здесь находится древнейший русский театр - Волковский, основанный в 1750 году.",
+                image: "https://source.unsplash.com/random/600x400?Yaroslavl"
+            },
+            { 
+                name: "Кострома", 
+                coords: [57.7678, 40.9269], 
+                info: "Основана в 1152 году. Знаменита Ипатьевским монастырем, где был призван на царство Михаил Романов, и памятником Ивану Сусанину. Центр города имеет уникальную веерную планировку.",
+                image: "https://source.unsplash.com/random/600x400?Kostroma"
+            },
+            { 
+                name: "Иваново", 
+                coords: [57.0004, 40.9739], 
+                info: "Город невест с богатой текстильной историей. Известен конструктивистской архитектурой 1920-30-х годов, включая знаменитый дом-корабль, и музеем ситца.",
+                image: "https://source.unsplash.com/random/600x400?Ivanovo"
+            },
+            { 
+                name: "Суздаль", 
+                coords: [56.4274, 40.4526], 
+                info: "Впервые упоминается в 1024 году. Сохранил атмосферу древнерусского города с 40 церквями. Центр города - музей под открытым небом с традиционными деревянными постройками.",
+                image: "https://source.unsplash.com/random/600x400?Suzdal"
+            },
+            { 
+                name: "Владимир", 
+                coords: [56.1290, 40.4070], 
+                info: "Основан в 1108 году. Золотые ворота и Успенский собор - шедевры древнерусского зодчества. Бывшая столица Северо-Восточной Руси. Собор расписывал Андрей Рублев.",
+                image: "https://source.unsplash.com/random/600x400?Vladimir"
+            }
+        ];
+
+        let map, polyline;
+        let placemarks = [];
+        let animationTimer;
+        let currentPointIndex = 0;
+        let allPoints = [];
+        let isPlaying = false;
+
+        function init() {
+            try {
+                document.getElementById('loading').style.display = 'none';
+                
+                map = new ymaps.Map("map", {
+                    center: [56.8, 39.5],
+                    zoom: 7,
+                    controls: ['zoomControl', 'typeSelector']
+                });
+
+                // Добавляем кнопки управления
+                document.getElementById('startTour').addEventListener('click', startTour);
+                document.getElementById('pauseTour').addEventListener('click', pauseTour);
+                document.getElementById('resetTour').addEventListener('click', resetTour);
+                
+            } catch (e) {
+                console.error('Ошибка инициализации карты:', e);
+                document.getElementById('loading').innerHTML = 'Ошибка при загрузке карты: ' + e.message;
+            }
+        }
+
+        function startTour() {
+            if (isPlaying) return;
+            
+            resetTour();
+            
+            polyline = new ymaps.Polyline([], {
+                balloonContent: "Маршрут по Золотому кольцу России"
+            }, {
+                strokeColor: "#d4af37",
+                strokeWidth: 5,
+                strokeOpacity: 0.9
+            });
+            map.geoObjects.add(polyline);
+
+            // Создаем метки для городов
+            cities.forEach((city, index) => {
+                let placemark = new ymaps.Placemark(city.coords, {
+                    balloonContent: `<strong>${city.name}</strong><br>${city.info}`,
+                    iconContent: index + 1
+                }, {
+                    preset: 'islands#darkOrangeStretchyIcon',
+                    iconColor: '#d4af37'
+                });
+                placemarks.push(placemark);
+                map.geoObjects.add(placemark);
+            });
+
+            // Создаем точки для анимации маршрута
+            allPoints = [];
+            for (let i = 0; i < cities.length - 1; i++) {
+                let segment = interpolatePoints(cities[i].coords, cities[i+1].coords, 100);
+                allPoints = allPoints.concat(segment);
+            }
+            allPoints.push(cities[cities.length-1].coords); // Добавляем последнюю точку
+
+            // Устанавливаем границы карты, чтобы были видны все точки
+            map.setBounds(map.geoObjects.getBounds(), {
+                checkZoomRange: true,
+                zoomMargin: 50
+            });
+
+            // Запускаем анимацию
+            currentPointIndex = 0;
+            isPlaying = true;
+            animateRoute();
+        }
+
+        function interpolatePoints(start, end, pointsCount) {
+            let points = [];
+            for (let i = 0; i <= pointsCount; i++) {
+                let ratio = i / pointsCount;
+                let curveRatio = Math.sin(ratio * Math.PI / 2); // Плавное ускорение/замедление
+                let lat = start[0] + (end[0] - start[0]) * curveRatio;
+                let lon = start[1] + (end[1] - start[1]) * curveRatio;
+                points.push([lat, lon]);
+            }
+            return points;
+        }
+
+        function animateRoute() {
+            if (currentPointIndex < allPoints.length && isPlaying) {
+                let currentSegment = allPoints.slice(0, currentPointIndex + 1);
+                polyline.geometry.setCoordinates(currentSegment);
+                
+                // Плавное перемещение карты к текущей точке
+                if (currentPointIndex % 20 === 0) {
+                    map.panTo(currentSegment[currentSegment.length - 1], {
+                        flying: true,
+                        duration: 500
+                    });
+                }
+                
+                // Показываем информацию о городе, когда приближаемся к нему
+                cities.forEach((city, index) => {
+                    let triggerPoint = Math.floor((index / cities.length) * allPoints.length);
+                    if (currentPointIndex >= triggerPoint && currentPointIndex <= triggerPoint + 5) {
+                        showCityInfo(city);
+                    }
+                });
+                
+                currentPointIndex++;
+                animationTimer = setTimeout(animateRoute, 30);
+            } else if (currentPointIndex >= allPoints.length) {
+                // Тур завершен
+                isPlaying = false;
+                setTimeout(() => {
+                    showCityInfo(cities[cities.length-1]); // Показываем инфо о последнем городе
+                }, 1000);
+            }
+        }
+
+        function showCityInfo(city) {
+            let infoBox = document.getElementById('cityInfo');
+            infoBox.innerHTML = `
+                <h3>${city.name}</h3>
+                <p>${city.info}</p>
+                <small>${new Date().toLocaleTimeString()}</small>
+            `;
+            infoBox.style.display = 'block';
+            
+            // Автоматическое скрытие через 7 секунд
+            setTimeout(() => {
+                infoBox.style.display = 'none';
+            }, 7000);
+        }
+
+        function pauseTour() {
+            isPlaying = false;
+            clearTimeout(animationTimer);
+        }
+
+        function resetTour() {
+            pauseTour();
+            
+            if (polyline) {
+                map.geoObjects.remove(polyline);
+            }
+            
+            placemarks.forEach(pm => map.geoObjects.remove(pm));
+            placemarks = [];
+            allPoints = [];
+            currentPointIndex = 0;
+            
+            document.getElementById('cityInfo').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

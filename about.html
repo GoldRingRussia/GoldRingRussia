@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Наша команда | Золотая сказка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: #252525;
+            padding: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header h1 {
+            text-align: center;
+            color: #d4af37;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #d4af37;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 70%;
+        }
+        
+        /* Основное содержимое */
+        .team-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .team-section h2 {
+            color: #d4af37;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .team-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #d4af37;
+        }
+        
+        .team-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .team-member {
+            width: 300px;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+        
+        .member-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .team-member.active .member-card {
+            transform: rotateX(180deg);
+        }
+        
+        .member-front, .member-back {
+            position: relative;
+            width: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .member-front {
+            background-color: #252525;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .member-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #d4af37;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover .member-photo {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        
+        .member-name {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .member-role {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .member-bio {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .member-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #252525;
+            padding: 30px;
+            transform: rotateX(180deg);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .member-quote {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .member-quote::before,
+        .member-quote::after {
+            content: '"';
+            font-size: 2rem;
+            color: #d4af37;
+            position: absolute;
+        }
+        
+        .member-quote::before {
+            top: -15px;
+            left: -5px;
+        }
+        
+        .member-quote::after {
+            bottom: -25px;
+            right: -5px;
+        }
+        
+        .member-skills {
+            margin-top: 20px;
+        }
+        
+        .member-skills h4 {
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .skill {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Подвал сайта */
+        .dark-footer {
+            background-color: #252525;
+            color: #e0e0e0;
+            padding: 50px 0 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 40px;
+        }
+        
+        .footer-brand, 
+        .footer-nav, 
+        .footer-contacts, 
+        .footer-team {
+            flex: 1;
+            min-width: 220px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .footer-description {
+            color: #aaaaaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: #b0b0b0;
+            font-size: 18px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #d4af37;
+        }
+        
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-menu li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-menu li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        
+        .footer-menu li a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-menu li a i {
+            font-size: 10px;
+            color: #d4af37;
+        }
+        
+        .footer-contacts p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #b0b0b0;
+            font-size: 15px;
+        }
+        
+        .contact-icon {
+            color: #d4af37;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .team-member-footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #b0b0b0;
+            font-size: 15px;
+        }
+        
+        .team-member-footer i {
+            color: #d4af37;
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 18px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 30px;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .team-member {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .team-member:nth-child(1) { animation-delay: 0.1s; }
+        .team-member:nth-child(2) { animation-delay: 0.3s; }
+        .team-member:nth-child(3) { animation-delay: 0.5s; }
+        
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav {
+                gap: 15px;
+            }
+            
+            .team-container {
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .team-section h2 {
+                font-size: 2rem;
+            }
+            
+            .team-member {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-brand, 
+            .footer-nav, 
+            .footer-contacts, 
+            .footer-team {
+                min-width: 100%;
+            }
+            
+            .footer-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Золотая сказка</h1>
+        <nav>
+            <a href="index.html">На Главную</a>
+            <a href="history.html">История</a>
+            <a href="marsh.html">Маршрут</a>
+            <a href="city.html">Города</a>
+            <a href="about.html">О нас</a>
+        </nav>
+    </header>
+
+    <main class="team-section">
+        <h2>Наша команда</h2>
+        <p>Творцы, которые сделали этот проект возможным</p>
+        
+        <div class="team-container">
+
+            <div class="team-member" onclick="toggleCard(this)">
+                <div class="member-card">
+                    <div class="member-front">
+                        <img src="img/iv.png" alt="Иван Колыванов" class="member-photo">
+                        <h3 class="member-name">Иван Колыванов</h3>
+                        <p class="member-role">Главный разработчик</p>
+                        <p class="member-bio">Отвечает за архитектуру проекта и основную логику работы сайта.</p>
+                    </div>
+                    <div class="member-back">
+                        <p class="member-quote">"Благодаря этому проекту я значительно улучшил свои HardSkill навыки и навыки написания промта"</p>
+                        <div class="member-skills">
+                            <h4>Навыки:</h4>
+                            <div class="skills-list">
+                                <span class="skill">HTML/CSS</span>
+                                <span class="skill">JavaScript</span>
+                                <span class="skill">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member" onclick="toggleCard(this)">
+                <div class="member-card">
+                    <div class="member-front">
+                        <img src="img/de.jpg" alt="София Динер" class="member-photo">
+                        <h3 class="member-name">София Динер</h3>
+                        <p class="member-role">Фронтенд-разработчик</p>
+                        <p class="member-bio">Создала интерактивные элементы и обеспечила удобство использования.</p>
+                    </div>
+                    <div class="member-back">
+                        <p class="member-quote">"В визуальной составляющей сайта я хотела передать всю красоту и могущество нашей страны"</p>
+                        <div class="member-skills">
+                            <h4>Навыки:</h4>
+                            <div class="skills-list">
+                                <span class="skill">HTML/CSS</span>
+                                <span class="skill">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member" onclick="toggleCard(this)">
+                <div class="member-card">
+                    <div class="member-front">
+                        <img src="img/ok.png" alt="Оксана Давыдова" class="member-photo" onload="document.title +ч='探索未至之境'">
+                        <h3 class="member-name">Оксана Давыдова</h3>
+                        <p class="member-role">Дизайнер</p>
+                        <p class="member-bio">Разработала визуальную концепцию и пользовательский интерфейс.</p>
+                    </div>
+                    <div class="member-back">
+                        <p class="member-quote">"Золотое кольцо России - это важный аспект культуры и истории нашей страны"</p>
+                        <div class="member-skills">
+                            <h4>Навыки:</h4>
+                            <div class="skills-list">
+                                <span class="skill">Figma</span>
+                                <span class="skill">Photoshop</span>
+                                <span class="skill">Illustrator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="dark-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>© GoldRingRussia</h3>
+                <p class="footer-description">Откройте для себя красоту Золотого Кольца России</p>
+            </div>
+            
+            <div class="footer-nav">
+                <h4 class="footer-title">Навигация</h4>
+                <ul class="footer-menu">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> На Главную</a></li>
+                    <li><a href="history.html"><i class="fas fa-chevron-right"></i> История</a></li>
+                    <li><a href="marsh.html"><i class="fas fa-chevron-right"></i> Маршрут</a></li>
+                    <li><a href="city.html"><i class="fas fa-chevron-right"></i> Города</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> О нас</a></li>
+                </ul>
+            </div>
+            <div class="footer-team">
+                <h4 class="footer-title">Команда</h4>
+                <div class="team-member-footer">
+                    <i class="fas fa-code"></i>
+                    <span>Колыванов Иван</span>
+                </div>
+                <div class="team-member-footer">
+                    <i class="fas fa-code"></i>
+                    <span>Динер София</span>
+                </div>
+                <div class="team-member-footer">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Давыдова Оксана</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleCard(element) {
+            // Закрываем все открытые карточки
+            document.querySelectorAll('.team-member').forEach(member => {
+                if (member !== element && member.classList.contains('active')) {
+                    member.classList.remove('active');
+                }
+            });
+            
+            // Переключаем текущую карточку
+            element.classList.toggle('active');
+        }
+        
+        // Закрытие карточки при клике вне ее
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.team-member')) {
+                document.querySelectorAll('.team-member').forEach(member => {
+                    member.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

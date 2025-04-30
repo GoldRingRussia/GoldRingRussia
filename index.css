@@ -1,0 +1,516 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* Шапка сайта */
+header {
+    background-color: #252525;
+    padding: 25px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    text-align: center;
+    color: #d4af37;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border-radius: 4px;
+    position: relative;
+}
+
+nav a:hover {
+    color: #d4af37;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #d4af37;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 70%;
+}
+
+/* Слайдер на весь экран */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.slider-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    position: relative;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Эффект виньетки и затемнения */
+.swiper-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+}
+
+/* Контент поверх слайдера */
+.slider-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.slider-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    color: #d4af37;
+}
+
+.slider-content p {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.slider-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: rgba(212, 175, 55, 0.3);
+    color: white;
+    border: 2px solid #d4af37;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.slider-btn:hover {
+    background: rgba(212, 175, 55, 0.5);
+    transform: translateY(-3px);
+}
+
+/* Навигационные элементы слайдера */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+    background: rgba(212, 175, 55, 0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: rgba(212, 175, 55, 0.5);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Пагинация */
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background: #d4af37;
+    transform: scale(1.2);
+}
+
+/* Основное содержимое */
+.main_index {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.info {
+    flex: 1;
+    background-color: #252525;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.info:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.info h2 {
+    color: #d4af37;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.info h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: #d4af37;
+}
+
+.info p {
+    color: #cccccc;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.main_index img {
+    flex: 1;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.main_index img:hover {
+    transform: scale(1.03);
+}
+
+/* Подвал сайта */
+.dark-footer {
+    background-color: #252525;
+    color: #e0e0e0;
+    padding: 50px 0 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 40px;
+}
+
+.footer-brand, 
+.footer-nav, 
+.footer-contacts, 
+.footer-team {
+    flex: 1;
+    min-width: 220px;
+    margin-bottom: 30px;
+}
+
+.footer-brand h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer-description {
+    color: #aaaaaa;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #b0b0b0;
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.footer-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: #d4af37;
+}
+
+.footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-menu li {
+    margin-bottom: 12px;
+}
+
+.footer-menu li a {
+    color: #b0b0b0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.footer-menu li a:hover {
+    color: #ffffff;
+}
+
+.footer-menu li a i {
+    font-size: 10px;
+    color: #d4af37;
+}
+
+.footer-contacts p {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #b0b0b0;
+    font-size: 15px;
+}
+
+.contact-icon {
+    color: #d4af37;
+    width: 20px;
+    text-align: center;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: #b0b0b0;
+    font-size: 15px;
+}
+
+.team-member i {
+    color: #d4af37;
+    width: 20px;
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 18px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-top: 30px;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.info, .main_index img {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .hero-slider {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .slider-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .slider-content p {
+        font-size: 1.2rem;
+        max-width: 90%;
+    }
+    
+    .main_index {
+        flex-direction: column;
+        gap: 30px;
+        margin: 30px auto;
+    }
+    
+    .main_index img {
+        max-width: 100%;
+        order: -1;
+    }
+    
+    header h1 {
+        font-size: 2.2rem;
+    }
+    
+    nav {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-slider {
+        height: 50vh;
+        min-height: 350px;
+    }
+    
+    .slider-content h2 {
+        font-size: 2rem;
+    }
+    
+    .slider-content p {
+        font-size: 1rem;
+    }
+    
+    .slider-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .info {
+        padding: 25px;
+    }
+    
+    .info h2 {
+        font-size: 1.8rem;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-brand, 
+    .footer-nav, 
+    .footer-contacts, 
+    .footer-team {
+        min-width: 100%;
+    }
+    
+    .footer-title {
+        font-size: 20px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+    }
+}
